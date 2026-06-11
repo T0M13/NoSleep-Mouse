@@ -66,7 +66,6 @@ Needs `xdotool` (X11) or `ydotool` (Wayland). See [`linux/`](linux/).
 | **Windows** | Web UI **+** CLI | None | ✅ Tested |
 | **macOS** | CLI (`osascript`) | None (needs Accessibility permission) | 🧪 Best-effort |
 | **Linux** | CLI (`xdotool`/`ydotool`) | One input tool | 🧪 Best-effort |
-| **iOS / iPadOS** | — | — | ❌ Not possible (Apple sandboxing) |
 
 > The macOS and Linux scripts are written to be correct but **haven't been tested on
 > real hardware** — feedback and PRs welcome.
