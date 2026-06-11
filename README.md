@@ -6,9 +6,9 @@
 </p>
 
 <p align="center">
-  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-a4463e">
-  <img alt="Platform" src="https://img.shields.io/badge/platform-Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-a4463e">
-  <img alt="No installs" src="https://img.shields.io/badge/installs-none%20on%20Windows-a4463e">
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-a4463e?labelColor=30363d&style=flat"></a>
+  <a href="#platform-support"><img alt="Platforms: Windows, macOS, Linux" src="https://img.shields.io/badge/platforms-Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-a4463e?labelColor=30363d&style=flat"></a>
+  <a href="#quick-start"><img alt="No installs needed on Windows" src="https://img.shields.io/badge/installs-none%20on%20Windows-a4463e?labelColor=30363d&style=flat"></a>
 </p>
 
 <p align="center">
