@@ -64,6 +64,26 @@ Invoke-RestMethod http://localhost:8787/api/quit -Method POST
 
 Settings are saved to `config.json` next to the script and restored next launch.
 
+## Troubleshooting
+
+**It "opens and instantly closes" / the web UI won't load.**
+`Start.bat` runs hidden, so you never see the error. Run one of these instead — the
+window **stays open** so you can read what happened:
+
+- **`Run-Console.bat`** — visible console mode (no web server, just the jiggler +
+  a live log). Best for confirming the core works on this machine.
+- **`Debug-WebUI.bat`** — visible web-UI mode with `-KeepAlive`, so it won't
+  auto-close while you inspect it. If the UI works here but not from `Start.bat`,
+  the auto-close (below) was the cause.
+
+Common causes:
+- **Port already in use** — another copy is running, or something else holds
+  port 8787. Run `Stop.bat`, or start with `-Port 8788`.
+- **Auto-close while using it** — the UI sends a heartbeat; if it goes silent the
+  service stops on purpose. Browsers throttle **background tabs**, so leaving the
+  dashboard tab in the background used to stop it. The timeout is now generous
+  (~90s); use `-KeepAlive` (or `Debug-WebUI.bat`) to disable auto-close entirely.
+
 ## Notes
 
 - **First run:** Windows SmartScreen may warn because the scripts aren't
@@ -77,6 +97,8 @@ Settings are saved to `config.json` next to the script and restored next launch.
 | File | What it is |
 |------|------------|
 | `Start.bat` | Double-click to launch (hidden) + open the UI |
+| `Run-Console.bat` | Visible console mode (live log) — for troubleshooting |
+| `Debug-WebUI.bat` | Visible web-UI mode (`-KeepAlive`) — for troubleshooting |
 | `Stop.bat` | Stops the helper |
 | `server.ps1` | The web server + console loop + input nudger |
 | `web/` | The dashboard (HTML/CSS/JS, Teko font) |

@@ -84,7 +84,8 @@ $script:lastNudge = Get-Date
 $script:count     = 0
 $script:running   = $true
 $script:lastSeen  = $null   # last time the web UI talked to us (for auto-shutdown)
-$IdleShutdownSec  = 6       # UI polls every 1s; if silent this long, the UI is gone
+$IdleShutdownSec  = 90      # UI polls every 1s; keep this generous so background-tab
+                            # throttling (browsers slow inactive tabs) doesn't kill us
 
 function In-ActiveHours {
   if (-not $script:cfg.hoursEnabled) { return $true }
@@ -225,10 +226,24 @@ if ($Console) {
 
 # ---- web UI mode ----
 $listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Loopback, $Port)
-$listener.Start()
+try {
+  $listener.Start()
+} catch {
+  Write-Host ""
+  Write-Host "ERROR: couldn't start the web server on port $Port."
+  Write-Host "It's probably already in use (NoSleep already running, or another app)."
+  Write-Host "Fix: run Stop.bat first, or start on another port:  server.ps1 -Port 8788"
+  Write-Host ""
+  return
+}
 if (-not $NoBrowser) { Start-Process "http://localhost:$Port/" }
 $autoShutdown = -not $KeepAlive   # stop the service when the web UI is closed
-Write-Host "NoSleep web UI -> http://localhost:$Port/   (close the tab to stop, or run Stop.bat)"
+Write-Host "NoSleep web UI -> http://localhost:$Port/"
+if ($autoShutdown) {
+  Write-Host "(auto-stops ~$IdleShutdownSec s after the browser tab is closed; use -KeepAlive to keep running)"
+} else {
+  Write-Host "(KeepAlive on: stays running after the tab closes; stop with Ctrl+C or Stop.bat)"
+}
 
 try {
   while ($script:running) {
@@ -237,6 +252,7 @@ try {
     # auto-shutdown: once the UI has connected, exit if it goes silent (tab closed)
     if ($autoShutdown -and $script:lastSeen -and
         ((Get-Date) - $script:lastSeen).TotalSeconds -gt $IdleShutdownSec) {
+      Write-Host ("[{0}] browser/UI silent for >{1}s - assuming the tab was closed, stopping." -f (Get-Date -Format HH:mm:ss), $IdleShutdownSec)
       $script:running = $false; continue
     }
 
@@ -313,6 +329,7 @@ try {
 
         '^POST /api/quit$' {
           Send-Text $ns "200 OK" 'text/plain' 'bye'
+          Write-Host ("[{0}] quit requested - stopping." -f (Get-Date -Format HH:mm:ss))
           $script:running = $false
         }
 
