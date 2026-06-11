@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>No Sleep</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main id="ns_main">
+      <div id="ns_clock">--</div>
+      <div id="ns_status">paused</div>
+
+      <label class="switch" title="Stay online">
+        <input id="toggleEnabled" type="checkbox" aria-label="Stay online" />
+        <span class="slider round"></span>
+        <span class="visually-hidden">Stay online</span>
+      </label>
+
+      <section class="block">
+        <div class="label">Nudge every</div>
+        <div id="intervalControls" class="btnrow">
+          <button data-sec="30">30 sec</button>
+          <button data-sec="60">1 min</button>
+          <button data-sec="300">5 min</button>
+          <button id="customBtn">Custom</button>
+        </div>
+        <div id="customWrap" class="hidden">
+          <input id="customSec" type="number" min="5" max="86400" step="5" value="60" />
+          <span class="unit">seconds</span>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="label">Method</div>
+        <div id="methodControls" class="btnrow">
+          <button data-method="mouse">Mouse</button>
+          <button data-method="key">Key (F15)</button>
+        </div>
+      </section>
+
+      <section id="moveBlock" class="block">
+        <div class="label">Movement</div>
+        <div id="dirControls" class="btnrow">
+          <button data-dir="random">Random</button>
+          <button data-dir="horizontal">Left/Right</button>
+          <button data-dir="vertical">Up/Down</button>
+          <button data-dir="circle">Circle</button>
+        </div>
+        <div class="timerow">
+          <span class="unit">distance</span>
+          <input id="moveDistance" type="number" min="1" max="2000" step="10" value="60" />
+          <span class="unit">px</span>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="label inline">
+          Active hours
+          <label class="switch small">
+            <input id="toggleHours" type="checkbox" aria-label="Limit to active hours" />
+            <span class="slider round"></span>
+            <span class="visually-hidden">Limit to active hours</span>
+          </label>
+        </div>
+        <div id="hoursWrap" class="hidden timerow">
+          <input id="fromTime" type="time" value="09:00" />
+          <span class="unit">to</span>
+          <input id="toTime" type="time" value="17:00" />
+        </div>
+      </section>
+
+      <div id="ns_count" class="count"></div>
+
+      <footer id="ns_footer">
+        <p class="footer_left">
+          made by
+          <a class="ti_hover_effect" href="https://www.tamas-illes.com" target="_blank" rel="noopener">tomi</a>
+        </p>
+        <p class="footer_right">
+          <button id="quitBtn" class="ghost" title="Stop & close the helper">quit</button>
+          <label class="switch small">
+            <input id="toggleDark" type="checkbox" aria-label="Toggle dark mode" />
+            <span class="slider round"></span>
+            <span class="visually-hidden">Toggle dark mode</span>
+          </label>
+        </p>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

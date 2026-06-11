@@ -1,0 +1,16 @@
+# Keep shell scripts LF so they run on macOS/Linux (no \r in the shebang)
+*.sh        text eol=lf
+*.command   text eol=lf
+
+# Windows scripts stay CRLF
+*.bat       text eol=crlf
+*.ps1       text eol=crlf
+
+# Web assets normalize to LF
+*.html      text eol=lf
+*.css       text eol=lf
+*.js        text eol=lf
+
+# Binaries
+*.png       binary
+*.ttf       binary
