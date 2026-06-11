@@ -8,7 +8,8 @@
 <p align="center">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-a4463e?labelColor=30363d&style=flat"></a>
   <a href="#platform-support"><img alt="Platforms: Windows, macOS, Linux" src="https://img.shields.io/badge/platforms-Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-a4463e?labelColor=30363d&style=flat"></a>
-  <a href="#quick-start"><img alt="No installs needed on Windows" src="https://img.shields.io/badge/installs-none%20on%20Windows-a4463e?labelColor=30363d&style=flat"></a>
+  <a href="#quick-start"><img alt="Windows: zero setup" src="https://img.shields.io/badge/Windows-zero%20setup-a4463e?labelColor=30363d&style=flat"></a>
+  <a href="https://github.com/T0M13/NoSleep-Mouse/releases/latest"><img alt="Download" src="https://img.shields.io/badge/download-latest%20release-a4463e?labelColor=30363d&style=flat"></a>
 </p>
 
 <p align="center">
@@ -29,14 +30,17 @@ idle timer never trips and you stay **active**.
   up-down / circle) and distance in pixels. Or go **invisible** with an F15 keypress.
 - ⏱️ **Your interval** — every 30s, 1m, 5m, or whatever you want.
 - 🕘 **Active hours** — only run between, say, 09:00 and 17:00.
-- 🪶 **No installs on Windows** — it's just a script that ships with what Windows
+- 🪶 **Zero setup on Windows** — it's just a script that ships with what Windows
   already has. Double-click and go.
 - 🖥️ **Web UI _and_ command line** — use the dashboard or drive it from a terminal.
 
 ## Quick start
 
+Grab the zip for your OS from the **[latest release](https://github.com/T0M13/NoSleep-Mouse/releases/latest)**
+and unzip it. (Or clone the repo and use the matching folder.)
+
 ### Windows
-1. Download this repo → open the [`windows/`](windows/) folder.
+1. Unzip **`NoSleep-Mouse-Windows.zip`**.
 2. Double-click **`Start.bat`**.
 3. The dashboard opens in your browser. Flip it on. Done.
 4. **Close the tab to stop** (the background helper shuts itself down).
@@ -47,15 +51,17 @@ powershell -ExecutionPolicy Bypass -File server.ps1 -Console -Interval 30 -Dir c
 ```
 
 ### macOS
+Unzip **`NoSleep-Mouse-macOS.zip`**, then:
 ```bash
-cd macos && chmod +x nosleep.command && ./nosleep.command -i 30 -r circle -d 150
+chmod +x nosleep.command && ./nosleep.command -i 30 -r circle -d 150
 ```
 Uses the built-in `osascript` — no installs, but grant **Accessibility** permission
 once (System Settings → Privacy & Security → Accessibility). See [`macos/`](macos/).
 
 ### Linux
+Unzip **`NoSleep-Mouse-Linux.zip`**, then:
 ```bash
-cd linux && chmod +x nosleep.sh && ./nosleep.sh -i 30 -r circle -d 150
+chmod +x nosleep.sh && ./nosleep.sh -i 30 -r circle -d 150
 ```
 Needs `xdotool` (X11) or `ydotool` (Wayland). See [`linux/`](linux/).
 
